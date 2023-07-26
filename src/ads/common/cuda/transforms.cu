@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stack>
 
+#include <thrust/execution_policy.h>
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
 #include <thrust/transform.h>

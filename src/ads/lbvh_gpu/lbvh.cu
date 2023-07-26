@@ -28,6 +28,8 @@
 #include <cub/block/block_store.cuh>
 #include <cub/block/block_scan.cuh>
 
+#include <thrust/sort.h>
+#include <thrust/execution_policy.h>
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
 #include <thrust/transform.h>

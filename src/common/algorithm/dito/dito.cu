@@ -10,6 +10,7 @@
 #include "common/cuda/util.h"
 #include "common/cuda/atomics.h"
 
+#include <thrust/execution_policy.h>
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
 #include <thrust/transform.h>

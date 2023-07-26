@@ -13,7 +13,7 @@ add_library(${PROJECT_NAME} SHARED
     ${CMAKE_SOURCE_DIR}/common/cuda/util.c
 )
 
-set_property(TARGET ${PROJECT_NAME} PROPERTY CUDA_ARCHITECTURES 70)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CUDA_ARCHITECTURES 60)
 
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 add_definitions(-DKR_EXPORT_API)

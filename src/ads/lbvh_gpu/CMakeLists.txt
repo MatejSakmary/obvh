@@ -24,7 +24,7 @@ add_library(${PROJECT_NAME} SHARED
     ${CMAKE_SOURCE_DIR}/common/queue.c
 )
 
-set_property(TARGET ${PROJECT_NAME} PROPERTY CUDA_ARCHITECTURES 70)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CUDA_ARCHITECTURES 60)
 
 #target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:O3>) 
 set(CMAKE_CUDA_LDFLAGS "${CMAKE_CUDA_LDFLAGS} --ptxas-options=-v -dlto")
