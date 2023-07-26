@@ -1,0 +1,81 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "hairball lbvh bench oobbs",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [ 
+                "-s","rsrc/gltf/hairball/hairball.gltf",
+                "-integrator", "bench",
+                "-intersector", "atrbvh_gpu",
+                "-use_oobbs",
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "windows": {
+                "type": "cppvsdbg",
+                "console": "externalTerminal"
+            }
+        },
+        {
+            "name": "hairball lbvh pt oobbs",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [ 
+                "-s","rsrc/gltf/hairball/hairball.gltf",
+                "-integrator", "pt_gpu",
+                "-intersector", "atrbvh_gpu",
+                "-use_oobbs",
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "windows": {
+                "type": "cppvsdbg",
+                "console": "externalTerminal"
+            }
+        },
+        {
+            "name": "hairball lbvh pt",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [ 
+                "-s","rsrc/gltf/hairball/hairball.gltf",
+                "-intersector", "lbvh_gpu",
+                "-integrator", "pt_gpu",
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "windows": {
+                "type": "cppvsdbg",
+                "console": "externalTerminal"
+            }
+        },
+        {
+            "name": "dragon lbvh pt oobbs",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [ 
+                "-s","rsrc/gltf/dragon/dragon.gltf",
+                "-integrator", "pt_gpu",
+                "-intersector", "atrbvh_gpu",
+                "-use_oobbs",
+                "-collapse"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "windows": {
+                "type": "cppvsdbg",
+                "console": "externalTerminal"
+            }
+        },
+    ]
+}

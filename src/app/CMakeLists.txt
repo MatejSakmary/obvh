@@ -22,25 +22,21 @@ add_executable(${PROJECT_NAME}
 )
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/../../deps/cmake/modules/" ${CMAKE_MODULE_PATH})
-set(FreeImage_DIR "" CACHE STRING "Custom FreeImage Library path")
-find_package(FreeImage)
+# set(FreeImage_DIR "" CACHE STRING "Custom FreeImage Library path")
+find_package(freeimage CONFIG REQUIRED)
+target_link_libraries (${PROJECT_NAME} PRIVATE freeimage::FreeImage)
+add_definitions(-DKR_HAS_FREEIMAGE=1)
 
 if(NOT WIN32)
   target_link_libraries(${PROJECT_NAME} m dl X11)
 endif()
 
 if(WIN32)
-  target_link_libraries (${PROJECT_NAME} opengl32)
-  #add_definitions(-DKR_USE_OPENGL=1)
+  target_link_libraries (${PROJECT_NAME} PRIVATE opengl32)
+  # add_definitions(-DKR_USE_OPENGL=1)
   add_definitions(-DGLEW_NO_GLU)
   add_definitions(-DGLEW_STATIC)
 endif()
-
-if (FreeImage_FOUND)
-  include_directories(${FREEIMAGE_INCLUDE_DIR})
-  target_link_libraries (${PROJECT_NAME} ${FREEIMAGE_LIBRARY})
-  add_definitions(-DKR_HAS_FREEIMAGE=1)
-endif (FreeImage_FOUND)
 
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 
@@ -49,9 +45,4 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "${CM
 set_property(TARGET ${PROJECT_NAME} PROPERTY VS_DEBUGGER_COMMAND_ARGUMENTS "-s ../../rsrc/gltf/crown/crown.gltf -integrator bench")
 
 if(WIN32)
-if (FreeImage_FOUND)
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy "\"${FreeImage_DIR}/FreeImage.dll\"" "\"$(SolutionDir)..\\bin\\$(Configuration)\\FreeImage.dll\""
-)
-endif()
 endif()
