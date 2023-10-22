@@ -484,14 +484,16 @@ kr_error kr_cuda_bvh_persistent_intersect(
 	u32 grid_size,
 	u32* warp_counter) {
 
-	dim3 blockSize = dim3(128);
-	int bx = (ray_count + blockSize.x - 1) / blockSize.x;
-	dim3 gridSize = dim3(bx);
-	//dim3 blockSize = dim3(block_size);
-	//dim3 gridSize = dim3(grid_size);
-	bvh_persistent_intersect << < gridSize, blockSize >> > (
+	kr_scalar elapsed_ms = KernelLaunch().execute([&]() {
+		dim3 blockSize = dim3(128);
+		int bx = (ray_count + blockSize.x - 1) / blockSize.x;
+		dim3 gridSize = dim3(bx);
+		bvh_persistent_intersect << < gridSize, blockSize >> > (
 		bvh, vertices, faces, primitives,
 		rays, isects, ray_count, warp_counter);
+	});
+
+	kr_log("bvh persistent intersect took %fms\n", elapsed_ms);
 
 	return kr_success;
 }
@@ -1461,13 +1463,16 @@ kr_error kr_cuda_soa_obvh_intersect(
 	u32 grid_size,
 	u32* warp_counter) {
 
-	dim3 blockSize = dim3(128);
-	int bx = (ray_count + blockSize.x - 1) / blockSize.x;
-	dim3 gridSize = dim3(bx);
+	kr_scalar elapsed_ms = KernelLaunch().execute([&]() {
+		dim3 blockSize = dim3(128);
+		int bx = (ray_count + blockSize.x - 1) / blockSize.x;
+		dim3 gridSize = dim3(bx);
 	
-	soa_obvh_persistent_intersect << < gridSize, blockSize >> > (
+		soa_obvh_persistent_intersect << < gridSize, blockSize >> > (
 		bvh, vertices, faces, primitives,
 		rays, isects, ray_count, warp_counter); 
+	});
+	kr_log("kr cuda soa obvh intersect took %fms\n", elapsed_ms);
 
 	return kr_success;
 }
